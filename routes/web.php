@@ -28,6 +28,10 @@ Route::get('/projects/{project}/edit','ProjectsController@edit');
 Route::patch('/projects/{project}','ProjectsController@update');
 Route::delete('/projects/{project}','ProjectsController@destroy');*/
 
+Route::get('/testx', function () {
+	return "Hello world";	
+});
+
 Route::get('/test', function () {
 	$parents = App\Category::where('parent_id', null)->with('children.children')->get();
 	/*dd($parents);*/
