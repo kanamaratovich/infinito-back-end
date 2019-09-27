@@ -31,3 +31,5 @@ Route::group([
     Route::post('me', 'AuthController@me');
 
 });
+
+Route::get('/','PagesController@home');

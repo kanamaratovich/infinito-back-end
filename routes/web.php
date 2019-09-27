@@ -39,25 +39,34 @@ Route::get('/test', function () {
 });
 
 Route::get('/test2/{id}', function ($id) {
-	$parents = App\Category::where('id', $id)->with('children.children')->get();
+	$category = App\Category::where('id', $id)->with('subCategories')->get();
 
-	$childIds = $parents->flatMap(function($parent) {
-		return $parent->children;
-	})
-	->flatMap(function($parent) {
-		return $parent->children;
-	})
-	->pluck('id');
+	//dd($category);
 
-	return App\Project::whereIn('category_id', $childIds)->get();
+	// $childIds = $parents->flatMap(function($parent) {
+	// 	return $parent->subCategories;
+	// })->flatMap(function($parent) {
+	// 	return $parent->children;
+	// })->pluck('id');
 
-	dd($childIds);
-	/*dd($parents);*/
-	return $parents;
+	// if(count($parents[0]->children)){
+		
+	// 	if(){}
+	// }
+
+	return $category->flatMap(function($subcategory) {
+	 	return $subcategory->subCategories;
+	 })->pluck('id');
+
+	return App\Category::productsByCategoryIds($category->pluck('id'));
 });
 
 
+Route::get('/test3/{id}', function ($id) {
+	
+	$parents = App\Category::where('id', $id)->get();
 
-
+	return App\Category::where('id', $id)->with('subCategories')->get();
+});
 
 
