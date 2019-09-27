@@ -33,3 +33,6 @@ Route::group([
 });
 
 Route::get('/','PagesController@home');
+
+Route::get('/categories','CategoryController@index');
+Route::post('/categories/create', 'CategoryController@create');
