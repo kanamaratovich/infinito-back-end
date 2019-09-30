@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
+ 
+use Exception;
 
 class AuthController extends Controller
 {
@@ -58,10 +60,16 @@ class AuthController extends Controller
         $credentials = request(['phone', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json([
+                'response' => 'Unauthorized',
+                'success' => false
+            ], 401);
         }
 
-        return $this->respondWithToken($token);
+        return response()->json([
+            'response' => $this->respondWithToken($token),
+            'success' => true
+            ],201);
     }
 
     /**
@@ -71,7 +79,18 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+            try {
+                // Validate the value...
+                return response()->json([
+                    'response' => auth()->user(),
+                    'success' => true
+                ],201);
+            } catch (Exception $e) {
+                report($e);
+
+                return false;
+            }
+        
     }
 
     /**
@@ -83,7 +102,10 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json([
+            'response' => 'Successfully logged out',
+            'success' => true
+        ]);
     }
 
     /**
@@ -93,7 +115,10 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return response()->json([
+            'response' => $this->respondWithToken(auth()->refresh()),
+            'success' => true
+        ]);
     }
 
     /**

@@ -9,6 +9,7 @@ class CategoryController extends Controller
 {
     public function index(){
     	return Category::where('parent_id', null)->with('subCategories')->get();
+    	//use PagesController home
     }
 
     public function create(){
@@ -17,4 +18,12 @@ class CategoryController extends Controller
     		'name' => request('name')
     	]);
     }
+
+    public function wehave(){
+
+    	$categories = request('categories');
+
+    	return $categories;
+    }
+
 }

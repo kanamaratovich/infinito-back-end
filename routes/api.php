@@ -35,4 +35,5 @@ Route::group([
 Route::get('/','PagesController@home');
 
 Route::get('/categories','CategoryController@index');
+Route::post('/categories/wehave','CategoryController@wehave');
 Route::post('/categories/create', 'CategoryController@create');
