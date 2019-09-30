@@ -18,6 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->string('name');
             $table->timestamps();
+
+            $table->foreign('parent_id')->references('id')->on('categories');
         });
     }
 
