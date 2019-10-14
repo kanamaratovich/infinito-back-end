@@ -26,11 +26,11 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'id','category_id');
+        return $this->hasMany(Product::class, 'category_id','id');
     }    
 
-    public static function productsByCategoryIds($childIds){
+    public static function productsByCategoryIds($ids){
 
-        return Product::whereIn('category_id', $childIds)->get();
+        return Product::whereIn('category_id', $ids)->get();
     }
 }

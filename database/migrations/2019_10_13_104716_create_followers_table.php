@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCompaniesTable extends Migration
+class CreateFollowersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('followers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('address');
-            $table->string('logo_url');
+            $table->unsignedBigInteger('vendor_id')->nullable();
+            $table->text('title')->nullable();
+            $table->integer('rating')->nullable();
+            $table->string('date_from')->nullable();
+            $table->string('econom_from')->nullable();
+            $table->string('discount')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('followers');
     }
 }

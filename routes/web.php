@@ -29,7 +29,15 @@ Route::patch('/projects/{project}','ProjectsController@update');
 Route::delete('/projects/{project}','ProjectsController@destroy');*/
 
 Route::get('/testx', function () {
-	return "Hello world";	
+	dd(  DB::table('categories as cat')
+                ->select('cat.id as category_id', 'ct.name', 'cat.position', 'cat.status', 'ct.locale',
+                DB::raw('COUNT(DISTINCT pc.product_id) as count'))
+                ->leftJoin('category_translations as ct', function($leftJoin) {
+                    $leftJoin->on('cat.id', '=', 'ct.category_id')
+                        ->where('ct.locale', app()->getLocale());
+                })
+                ->leftJoin('product_categories as pc', 'cat.id', '=', 'pc.category_id')
+                ->groupBy('cat.id','ct.name','ct.locale'));
 });
 
 Route::get('/test', function () {
