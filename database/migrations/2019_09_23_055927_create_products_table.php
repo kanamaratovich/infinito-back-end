@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('follower_id');
             $table->string('price');
             $table->timestamps();
+
+            $table->foreign('follower_id')->references('id')->on('followers');
         });
     }
 

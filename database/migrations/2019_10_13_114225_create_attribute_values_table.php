@@ -18,6 +18,8 @@ class CreateAttributeValuesTable extends Migration
             $table->unsignedBigInteger('attribute_id');
             $table->string('value');
             $table->timestamps();
+
+            $table->foreign('attribute_id')->references('id')->on('attributes');
         });
     }
 

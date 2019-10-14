@@ -23,6 +23,8 @@ class CreateFollowersTable extends Migration
             $table->string('econom_from')->nullable();
             $table->string('discount')->nullable();
             $table->timestamps();
+
+            $table->foreign('vendor_id')->references('id')->on('companies');
         });
     }
 
