@@ -17,6 +17,9 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('name');
+            $table->integer('position');
+            $table->string('icon');
+            $table->boolean('status')->dafault(true);
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('categories');
