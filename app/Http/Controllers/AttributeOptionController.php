@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AttributeValueController extends Controller
+class AttributeOptionController extends Controller
 {
     //
 }
