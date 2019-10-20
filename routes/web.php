@@ -77,4 +77,7 @@ Route::get('/test3/{id}', function ($id) {
 	return App\Category::where('id', $id)->with('subCategories')->get();
 });
 
+Route::get('/getChildCategories/test',function(){
+	return DB::select('SELECT public."getChildCategoryIds"(8)');
+});
 
