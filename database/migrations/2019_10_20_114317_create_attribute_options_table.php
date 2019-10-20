@@ -22,7 +22,6 @@ class CreateAttributeOptionsTable extends Migration
             $table->timestamps();
 
             $table->foreign('attribute_id')->references('id')->on('attributes');
-            $table->timestamps();
         });
     }
 

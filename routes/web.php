@@ -41,7 +41,7 @@ Route::get('/testx', function () {
 });
 
 Route::get('/test', function () {
-	$parents = App\Category::where('parent_id', null)->with('children.children')->get();
+	$parents = App\Category::where('parent_id', null)->with('childrenCategories')->get();
 	/*dd($parents);*/
 	return $parents;
 });
